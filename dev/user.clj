@@ -1,13 +1,14 @@
 (ns user
-  (:require [babashka.fs :as fs]
-            [clojure.java.shell :refer [sh]]
-            [clojure.string]
-            [nextjournal.clerk :as clerk]
-            [nextjournal.clerk.config :as config]
-            [nextjournal.clerk.viewer :as cv]
-            [shadow.cljs.devtools.server :as shadow.server]
-            [shadow.cljs.devtools.server.npm-deps :as npm-deps]
-            [shadow.cljs.devtools.api :as shadow.api]))
+  (:require
+   [babashka.fs :as fs]
+   [clojure.java.shell :refer [sh]]
+   [clojure.string]
+   [nextjournal.clerk :as clerk]
+   [nextjournal.clerk.config :as config]
+   [nextjournal.clerk.viewer :as cv]
+   [shadow.cljs.devtools.server :as shadow.server]
+   [shadow.cljs.devtools.server.npm-deps :as npm-deps]
+   [shadow.cljs.devtools.api :as shadow.api]))
 
 (def build-target
   {:git/url "https://github.com/ramblurr/nature-of-code"})
@@ -28,7 +29,7 @@
      (clerk/serve!
       (merge defaults opts))
      (Thread/sleep 1000)
-     (clerk/show! "notebooks/hello.clj"))))
+     #_(clerk/show! "notebooks/hello.clj"))))
 
 (defn start-with-shadow!
   ([] (start-with-shadow! {}))
@@ -95,7 +96,11 @@
 
 (comment
 
-  (start-with-shadow!)
+  (start-with-shadow!)                  ;; rcf
+  (do
+    (require '[portal.api :as p])
+    (def p (p/open {:theme :portal.colors/gruvbox}))
+    (add-tap #'p/submit))
 
   (garden!
    {:paths    ["src/**"]

@@ -1,6 +1,6 @@
 (ns noc.sci
   (:require [nextjournal.clerk.sci-env]
-            noc.custom
+            noc.sketch
             noc.render
             quil.core
             [sci.ctx-store]
@@ -9,8 +9,8 @@
 ;; ## SCI Customization
 
 (def custom-namespaces
-  {'noc.custom
-   (sci/copy-ns noc.custom (sci/create-ns 'noc.custom))
+  {'noc.sketch
+   (sci/copy-ns noc.sketch (sci/create-ns 'noc.sketch))
    'q
    (sci/copy-ns quil.core (sci/create-ns 'quil.core))
    'noc.render
@@ -20,7 +20,7 @@
    })
 
 (def custom-aliases
-  {'custom 'noc.custom})
+  {'sketch 'noc.sketch})
 
 (sci.ctx-store/swap-ctx!
  sci/merge-opts
