@@ -1,41 +1,46 @@
 {:paths ["src" "dev"]
- :deps {org.clojure/clojure {:mvn/version "1.11.1"}
-        io.github.nextjournal/clerk {:git/sha "ee0248bbc1054476e781e25b11414fa9899050b9"}}
+ :deps  {org.clojure/clojure {:mvn/version "1.11.2"}
+
+         ;; Make beautiful animations with p5.js
+         quil/quil {:mvn/version "4.3.1563"}
+
+         ;; silence log warnings
+         org.slf4j/slf4j-nop {:mvn/version "1.7.36"}
+
+         org.babashka/cli {:mvn/version "0.8.59"}
+
+         ;; This version needs to match the shadow-cljs version declared in `package.json`.
+         thheller/shadow-cljs      {:mvn/version "2.28.8"}
+         ;; the clojurescript version must match (or exceed?) the version declared by shadow-cljs:
+         ;; https://github.com/thheller/shadow-cljs/blob/master/project.clj#L40
+         org.clojure/clojurescript {:mvn/version "1.11.132"}
+
+         io.github.nextjournal/clerk        {:git/sha "ee0248bbc1054476e781e25b11414fa9899050b9"}
+         io.github.nextjournal/clerk.render {:git/url   "https://github.com/nextjournal/clerk"
+                                             ;; make sure this sha matches the one in `:deps` above.
+                                             :git/sha   "ee0248bbc1054476e781e25b11414fa9899050b9"
+                                             :deps/root "render"}}
  :aliases
  {:dev
   {:jvm-opts ["-Dpolyglot.engine.WarnInterpreterOnly=false" "-XX:-OmitStackTraceInFastThrow"]
    :extra-deps
-   {nrepl/nrepl                       {:mvn/version "1.1.1"}
-    cider/cider-nrepl                 {:mvn/version "0.48.0"}
-    djblue/portal                     {:mvn/version "0.55.1"}
-    refactor-nrepl/refactor-nrepl {:mvn/version "3.10.0"}
-    org.slf4j/slf4j-nop {:mvn/version "1.7.36"}
+   {nrepl/nrepl                   {:mvn/version "1.1.1"}
+    cider/cider-nrepl             {:mvn/version "0.48.0"}
+    djblue/portal                 {:mvn/version "0.55.1"}
+    refactor-nrepl/refactor-nrepl {:mvn/version "3.10.0"}}}
+  :repl
+  {:main-opts  ["-m" "nrepl.cmdline"
+                "--middleware" "[refactor-nrepl.middleware/wrap-refactor,cider.nrepl/cider-middleware,portal.nrepl/wrap-portal]"]}
 
-    quil/quil {:mvn/version "4.3.1563"}
-
-    io.github.nextjournal/clerk.render {:git/url "https://github.com/nextjournal/clerk"
-                                        ;; make sure this sha matches the one in `:deps` above.
-                                        :git/sha "ee0248bbc1054476e781e25b11414fa9899050b9"
-                                        :deps/root "render"}
-
-    ;; This version needs to match the shadow-cljs version declared in
-    ;; `package.json`.
-    thheller/shadow-cljs {:mvn/version "2.20.14"}
-
-    ;; the clojurescript version must match (or exceed?) the version declared by
-    ;; shadow-cljs:
-    ;; https://github.com/thheller/shadow-cljs/blob/master/project.clj#L40
-    org.clojure/clojurescript {:mvn/version "1.11.60"}}}
-
-  ;; This alias is used by https://clerk.garden/.
+;; This alias is used by https://clerk.garden/.
   :nextjournal/clerk
   {:exec-fn user/static-build!
    :exec-args
-   {:paths    ["src/**"]
+   {:paths    ["notebooks/**"]
     ;; TODO uncomment this if you want to specify a specific file as your index.
     ;; If it stays commented and you add more notebooks, Clerk will
     ;; automatically generate an index for you.
-    ;; :index "src/cljsclerk/cljsnotebook.clj"
+    ;; :index "notebooks/a_notebook.clj"
     :out-path "public"}}
 
   :watch
