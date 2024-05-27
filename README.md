@@ -2,7 +2,9 @@
 
 [![License][license]][license-url]
 
-This project is powered by Clerk.
+This is a ClojureScript implementation of the samples and exercises from [Nature of Code (2nd Edition)](noc2) by Daniel Shiffman 
+
+> ➡️View live at: https://ramblurr.github.io/nature-of-code/
 
 ## Dependencies
 
@@ -10,9 +12,7 @@ This project is powered by Clerk.
 
 - [Clojure CLI tools](https://clojure.org/guides/install_clojure)
 - [`babashka`](https://github.com/babashka/babashka#installation)
-
-To publish to GitHub Pages, you'll also need `node` installed, preferably via
-[`nvm`](https://github.com/nvm-sh/nvm#installing-and-updating).
+- [`nvm`](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ## Developing with Clerk
 
@@ -34,7 +34,7 @@ clj
 Then start the server:
 
 ```clj
-(start!)
+(start-with-shadow!)
 ```
 
 To show a file, pass it to `clerk/show!`:
@@ -58,24 +58,11 @@ bb build-static
 
 To generate a static site locally.
 
-### Push to GitHub
-
-Create a repo at https://github.com/new.
-
 ### Garden
 
 The easiest way to share a static build is to push to GitHub, then visit
 
 https://github.clerk.garden/ramblurr/nature-of-code
-
-
-### GitHub Pages
-
-To release to GitHub Pages, run
-
-```
-bb release-gh-pages
-```
 
 ## Linting
 
@@ -112,3 +99,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 [license]: https://img.shields.io/github/license/ramblurr/nature-of-code
 [license-url]: LICENSE
+[noc2]: https://github.com/nature-of-code/noc-book-2
