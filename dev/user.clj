@@ -15,7 +15,7 @@
 (def ^{:doc "static site defaults for local and github-pages modes."}
   defaults
   {:out-path   "public"
-   :cas-prefix "/"})
+   :cas-prefix "/nature-of-code/"})
 
 (defn start!
   "Starts a Clerk server process "

@@ -23,7 +23,6 @@
      ;; noc.sci is where all SCI customization happens. If you write any
      ;; custom CLJS or CLJC, require those namespaces in noc.sci to get
      ;; them included into the build.
-     [;; nextjournal.clerk.static-app
-      nextjournal.clerk.sci-env
+     [nextjournal.clerk.sci-env
       nextjournal.clerk.trim-image
       noc.sci]}}}}}
