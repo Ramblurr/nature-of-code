@@ -1,4 +1,4 @@
-{:paths ["src" "dev"]
+{:paths ["src" "dev" "resources"]
  :deps  {org.clojure/clojure {:mvn/version "1.11.2"}
 
          ;; Make beautiful animations with p5.js
@@ -37,10 +37,7 @@
   {:exec-fn user/static-build!
    :exec-args
    {:paths    ["notebooks/**"]
-    ;; TODO uncomment this if you want to specify a specific file as your index.
-    ;; If it stays commented and you add more notebooks, Clerk will
-    ;; automatically generate an index for you.
-    ;; :index "notebooks/a_notebook.clj"
+    :index "notebooks/index.md"
     :out-path "public"}}
 
   :watch

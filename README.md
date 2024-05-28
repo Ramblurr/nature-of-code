@@ -1,4 +1,4 @@
-# Nature of Code
+# Nature of Code - Clojure
 
 [![License][license]][license-url]
 

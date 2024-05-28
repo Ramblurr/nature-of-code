@@ -9,12 +9,9 @@
 ;; ## SCI Customization
 
 (def custom-namespaces
-  {'noc.sketch
-   (sci/copy-ns noc.sketch (sci/create-ns 'noc.sketch))
-   'q
-   (sci/copy-ns quil.core (sci/create-ns 'quil.core))
-   'noc.render
-   (sci/copy-ns noc.render (sci/create-ns 'noc.render))
+  {'noc.sketch (sci/copy-ns noc.sketch (sci/create-ns 'noc.sketch))
+   'q (sci/copy-ns quil.core (sci/create-ns 'quil.core))
+   'noc.render (sci/copy-ns noc.render (sci/create-ns 'noc.render))
    ;; Add any more namespaces here! Make sure to `:require` anything you add at
    ;; the top.
    })

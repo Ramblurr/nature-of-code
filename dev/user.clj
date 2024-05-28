@@ -96,19 +96,20 @@
 
 (comment
 
-  (start-with-shadow!)                  ;; rcf
   (do
+    (start-with-shadow!)
     (require '[portal.api :as p])
     (def p (p/open {:theme :portal.colors/gruvbox}))
-    (add-tap #'p/submit))
+    (add-tap #'p/submit)) ;; rcf
 
   (garden!
    {:paths    ["src/**"]
-    ;; TODO uncomment this if you want to specify a specific file as your index.
-    ;; If it stays commented and you add more notebooks, Clerk will
-    ;; automatically generate an index for you.
-    ;; :index "path/to/notebook.clj"
+    :index "notebooks/index.md"
     :out-path "public"})
 
-  ;;
+  (static-build! {:paths    ["notebooks/**"]
+                  ;; :index "notebooks/index.md"
+                  :out-path "public"})
+
+;;
   )
