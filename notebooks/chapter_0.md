@@ -139,3 +139,22 @@ Play with the sliders to adjust the mean and standard deviation.
 (slurp "src/noc/chapter_0_5e.cljs")
 (show-sketch :c0.5e)
 ```
+
+
+## [Example 0.5: An Accept-Reject Distribution](https://natureofcode.com/random/#example-05-an-accept-reject-distribution)
+
+Lazy sequences!
+
+`(repeatedly #(q/random 1))` generates an infinite lazy sequence of random numbers between 0 and 1. In Clojure, lazy sequences are evaluated on demand, meaning elements are only generated when needed.
+
+`(filter #(< (q/random 1) %))` filters the infinite sequence according to the probability function
+
+`(first)` picks the first number from the filtered sequence that matches the condition. Due to the lazy nature of sequences in Clojure, the sequence is generated and filtered element by element until a match is found.
+
+The code does not enter an infinite loop because the lazy evaluation of the sequence ensures that elements are only generated and processed as needed. The filter function processes each element in the sequence one by one, and as soon as an element satisfies the condition, first returns that element, terminating the evaluation.
+
+```clojure
+(show-sketch :c0.5)
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_0_5.cljs")
+```

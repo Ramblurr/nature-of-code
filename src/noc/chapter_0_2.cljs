@@ -10,7 +10,7 @@
 
 (defn tick [{:keys [counts] :as state}]
   (let [idx (Math/floor (q/random (count counts)))]
-    (update-in state [:counts idx] #(+ % 4))))
+    (update-in state [:counts idx] #(+ % 1))))
 
 (defn draw! [{:keys [counts]}]
   (q/background 255)
