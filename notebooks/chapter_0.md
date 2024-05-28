@@ -97,5 +97,31 @@ To move a point B towards point A by a small step using the Euclidean distance, 
     $$
 
 ```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_0_3e.cljs")
 (show-sketch :walker-dynamic)
+```
+
+
+## [Example 0.4: A Gaussian Distribution](https://natureofcode.com/random/#example-04-a-gaussian-distribution)
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_0_4.cljs")
+(show-sketch :random-gaussian)
+```
+
+
+## [Exercise 0.4: Gaussian Paint Splatter](https://natureofcode.com/random/#exercise-04)
+
+Our first bit of UI. Quil doesn't expose the p5.js UI widgets like
+[`createSlider`](https://p5js.org/reference/#/p5/createSlider).
+
+I didn't want to call those non-pure functions inside our pure `init-state` and `tick`, so I implemented them behind the scenes. As you can see the init state function can return a map containing a `:ui` key. This lets us declaratively handle the ui widgets.
+
+For the exercise itself the slider controls the standard deviation as suggested by the prompt. I went with a HSL color-mode that tends to be more reddish thanks to the normal distribution, but can be made a little more colorful by increasing the stdev.
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_0_4e.cljs")
+(show-sketch :c0.4e)
 ```

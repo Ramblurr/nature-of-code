@@ -3,15 +3,20 @@
   (:require [quil.core :as q]
             [quil.middleware :as m]
             [quil.sketch :as ap :include-macros true]
+            [noc.ui :as ui]
             [noc.chapter-0-1 :as c0.1]
             [noc.chapter-0-2 :as c0.2]
             [noc.chapter-0-3 :as c0.3]
-            [noc.chapter-0-3e :as c0.3e]))
+            [noc.chapter-0-3e :as c0.3e]
+            [noc.chapter-0-4 :as c0.4]
+            [noc.chapter-0-4e :as c0.4e]))
 
 (def sketches {:walker (sketch-> c0.1)
                :rand-dist (sketch-> c0.2)
                :walker-right (sketch-> c0.3)
-               :walker-dynamic (sketch-> c0.3e)})
+               :walker-dynamic (sketch-> c0.3e)
+               :random-gaussian (sketch-> c0.4)
+               :c0.4e (sketch-> c0.4e)})
 
 (defn load-sketch [s]
   (when-let [sk (get sketches s)]
@@ -60,15 +65,18 @@
            :time-acc          [1]
            :second?           false}})
 
-(defn setup-state [init-state]
-  (merge (default-state (time-now!)) init-state))
+(defn setup-state [init-fn]
+  (-> (default-state (time-now!))
+      (merge (init-fn {:width (q/width) :height (q/height)}))
+      (ui/prepare-ui)))
 
 (defn reset [sketch*]
-  (let [{:keys [applet opts init-state]} @sketch*
-        {:keys [setup]} opts]
+  (let [{:keys [applet opts]} @sketch*
+        {:keys [setup init]} opts]
     (ap/with-sketch applet
       (let [state* (q/state-atom)]
-        (reset! state* (setup-state init-state))
+        (ui/remove-all! @state*)
+        (reset! state* (setup-state init))
         (setup)))))
 
 (defn pause [sketch*]
@@ -85,17 +93,19 @@
         (q/frame-rate (-> @state* :_time :target-frame-rate))
         (swap! state* assoc :_paused? false)))))
 
-(defn setup-wrapper [adjust-frame {:keys [target-frame-rate] :as init-state} setup]
-  (adjust-frame)
-  (q/frame-rate target-frame-rate)
-  (setup)
-  (setup-state init-state))
+(defn setup-wrapper [adjust-frame init setup]
+  (let [{:keys [target-frame-rate] :as init-state} (setup-state init)]
+    (adjust-frame)
+    (q/frame-rate target-frame-rate)
+    (setup)
+    init-state))
 
 (defn update-inputs [state]
   (-> state
       (assoc :mouse-x (q/mouse-x)
              :mouse-y (q/mouse-y)
              :mouse-button (q/mouse-button)
+             :mouse-pressed? (q/mouse-pressed?)
              :key (q/key-as-keyword)
              :key-code (q/key-code)
              :raw-key (q/raw-key))))
@@ -104,6 +114,7 @@
   (->
    state
    (update-inputs)
+   (ui/update-ui)
    (assoc :width (q/width) :height (q/height))
    (tick-time (time-now!) (q/current-frame-rate))
    (tick)))
@@ -112,15 +123,13 @@
   (draw state))
 
 (defn show-sketch [adjust-frame {:keys [init setup tick draw size] :as opts} el]
-  (let [init-state (init {:width (first size) :height (last size)})]
-    {:applet (apply q/sketch (apply concat
-                                    (-> opts
-                                        (assoc :middleware [m/fun-mode])
-                                        (assoc :host el)
-                                        (assoc :update (partial tick-wrapper tick))
-                                        (assoc :setup (partial setup-wrapper (partial adjust-frame el) init-state setup))
-                                        (assoc :draw (partial draw-wrapper draw)))))
-     :sketch-name (:sketch-name opts)
-     :init-state init-state
-     :opts opts
-     :el el}))
+  {:applet (apply q/sketch (apply concat
+                                  (-> opts
+                                      (assoc :middleware [m/fun-mode])
+                                      (assoc :host el)
+                                      (assoc :update (partial tick-wrapper tick))
+                                      (assoc :setup (partial setup-wrapper (partial adjust-frame el) init setup))
+                                      (assoc :draw (partial draw-wrapper draw)))))
+   :sketch-name (:sketch-name opts)
+   :opts opts
+   :el el})

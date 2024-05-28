@@ -111,5 +111,8 @@
                   :index "notebooks/index.md"
                   :out-path "public"})
 
+  (update-in {:_ui {:foobar {:values :yay}}}
+             [:_ui]
+             #(dissoc % :foobar))
 ;;
   )
