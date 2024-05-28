@@ -19,7 +19,7 @@
 (defn rand-gaus [mean stdev] (+ mean (* stdev (q/random-gaussian))))
 
 (defn draw! [{:keys [width height ui]}]
-  (let [stdev (get-in ui [:stdev :value])
+  (let [stdev (get-in ui [:stdev :value] 0)
         x (rand-gaus (quot width 2) stdev)
         y (rand-gaus (quot height 2) stdev)]
     (q/no-stroke)

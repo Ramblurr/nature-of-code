@@ -125,3 +125,17 @@ For the exercise itself the slider controls the standard deviation as suggested 
 (slurp "src/noc/chapter_0_4e.cljs")
 (show-sketch :c0.4e)
 ```
+
+
+## [Exercise 0.5: Gaussian Random Walk](https://natureofcode.com/random/#exercise-05)
+
+Here I expand on the original random walk by constraining the walker inside the
+bounds of the sketch, and adjusting the step size based on a normal distribution.
+
+Play with the sliders to adjust the mean and standard deviation.
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_0_5e.cljs")
+(show-sketch :c0.5e)
+```
