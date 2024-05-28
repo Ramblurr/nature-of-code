@@ -29,6 +29,9 @@ You will always see at least three functions in each example
   initial state of the sketch."
   [{:keys [width height]}])
 
+```
+
+```clojure
 ^{:nextjournal.clerk/visibility {:code :show :result :hide}}
 (defn setup!
   "Setup initial canvas
@@ -37,15 +40,21 @@ You will always see at least three functions in each example
   whenever the sketch is restarted, and it is called in the Quil context, so it
   can make drawing calls. The return value is ignored."
   [])
+```
 
+```clojure
 ^{:nextjournal.clerk/visibility {:code :show :result :hide}}
 (defn tick
   "Update the state of the sketch
 
-  This pure function is called once per frame. It takes the current state and returns
+  This pure* function is called once per frame. It takes the current state and returns
   the next state."
   [state])
+```
 
+\* Sort of.. the tick fns will probably use [`q/random`](http://quil.info/api/math/random) to generate random numbers, which technically makes them not pure.
+
+```clojure
 ^{:nextjournal.clerk/visibility {:code :show :result :hide}}
 (defn draw!
   "Draw the current state of the sketch.

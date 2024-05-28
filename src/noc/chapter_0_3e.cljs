@@ -20,10 +20,10 @@
     {:x (+ bx (* step unit-dx))
      :y (+ by (* step unit-dy))}))
 
-(defn tick [{:keys [width height] :as state}]
+(defn tick [{:keys [width height mouse-x mouse-y] :as state}]
   (let [r             (q/random 1)
-        mx (q/mouse-x)
-        my (q/mouse-y)
+        mx mouse-x
+        my mouse-y
         centerx (quot width 2)
         centery (quot height 2)
         step (fn [{:keys [x y]}]

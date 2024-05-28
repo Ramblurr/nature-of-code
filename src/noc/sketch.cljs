@@ -1,6 +1,7 @@
 (ns noc.sketch
   (:require-macros [noc.sketch :refer [sketch->]])
   (:require [quil.core :as q]
+            [quil.middleware :as m]
             [quil.sketch :as ap :include-macros true]
             [noc.chapter-0-1 :as c0.1]
             [noc.chapter-0-2 :as c0.2]
@@ -66,28 +67,21 @@
   (let [{:keys [applet opts init-state]} @sketch*
         {:keys [setup]} opts]
     (ap/with-sketch applet
-      (let [state* (q/state :state)]
+      (let [state* (q/state-atom)]
         (reset! state* (setup-state init-state))
         (setup)))))
-
-(defn get-state* []
-  (try
-    (q/state :state)
-    (catch js/Error e
-      (.error js/console e)
-      nil)))
 
 (defn pause [sketch*]
   (let [{:keys [applet]} @sketch*]
     (ap/with-sketch applet
       (q/frame-rate 0)
-      (when-let [state* (get-state*)]
+      (when-let [state* (q/state-atom)]
         (swap! state* assoc :_paused? true)))))
 
 (defn resume [sketch*]
   (let [{:keys [applet]} @sketch*]
     (ap/with-sketch applet
-      (when-let [state* (get-state*)]
+      (when-let [state* (q/state-atom)]
         (q/frame-rate (-> @state* :_time :target-frame-rate))
         (swap! state* assoc :_paused? false)))))
 
@@ -95,27 +89,37 @@
   (adjust-frame)
   (q/frame-rate target-frame-rate)
   (setup)
-  (q/set-state! :state (atom (setup-state init-state))))
+  (setup-state init-state))
+
+(defn update-inputs [state]
+  (-> state
+      (assoc :mouse-x (q/mouse-x)
+             :mouse-y (q/mouse-y)
+             :mouse-button (q/mouse-button)
+             :key (q/key-as-keyword)
+             :key-code (q/key-code)
+             :raw-key (q/raw-key))))
 
 (defn tick-wrapper [tick state]
   (->
    state
+   (update-inputs)
    (assoc :width (q/width) :height (q/height))
    (tick-time (time-now!) (q/current-frame-rate))
    (tick)))
 
-(defn draw-wrapper [tick draw]
-  (let [state* (q/state :state)]
-    (swap! state* (partial tick-wrapper tick))
-    (draw @state*)))
+(defn draw-wrapper [draw state]
+  (draw state))
 
 (defn show-sketch [adjust-frame {:keys [init setup tick draw size] :as opts} el]
   (let [init-state (init {:width (first size) :height (last size)})]
     {:applet (apply q/sketch (apply concat
                                     (-> opts
+                                        (assoc :middleware [m/fun-mode])
                                         (assoc :host el)
+                                        (assoc :update (partial tick-wrapper tick))
                                         (assoc :setup (partial setup-wrapper (partial adjust-frame el) init-state setup))
-                                        (assoc :draw (partial draw-wrapper tick draw)))))
+                                        (assoc :draw (partial draw-wrapper draw)))))
      :sketch-name (:sketch-name opts)
      :init-state init-state
      :opts opts
