@@ -13,7 +13,6 @@
                                  nextjournal.clerk.viewer/mark-presented))])
    :attrs {:class "foobar"}
    :render-fn '(fn [blob-or-url opts]
-                 (prn "ATTRV" (-> opts :viewer :attrs))
                  [:img (merge {:src #?(:clj  (nextjournal.clerk.render/url-for blob-or-url)
                                        :cljs blob-or-url)}
                               (-> opts :viewer :attrs))])})

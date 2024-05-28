@@ -28,7 +28,7 @@ Implementing it in Clojure lets me train my functional muscles and it's rather f
 
 Though I've tried to keep the code as close to the original as possible, Clojure is an immutable functional programming language, and my translation of the examples adhere to that property.
 
-To learn how I've structured the code to avoid willy-nilly mutation or what tech I'm using to render all of this, check out the [background](background.md).
+To learn how I've structured the code to avoid willy-nilly mutation or what tech I'm using to render all of this, check out the [background](notebooks/background).
 
 ## Table of Contents
 
@@ -49,6 +49,6 @@ To learn how I've structured the code to avoid willy-nilly mutation or what tech
        [:div.text-xs.text-gray-500.group-hover:text-indigo-600.leading-normal description]]])
    [{:title "Chapter 0"
      :preview (io/resource "assets/img/chapter0.png")
-     :path "notebooks/chapter_0.clj"
+     :path "notebooks/chapter_0"
      :description "Randomness"}])))
 ```

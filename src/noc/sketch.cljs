@@ -1,21 +1,16 @@
 (ns noc.sketch
+  (:require-macros [noc.sketch :refer [sketch->]])
   (:require [quil.core :as q]
             [quil.sketch :as ap :include-macros true]
             [noc.chapter-0-1 :as c0.1]
             [noc.chapter-0-2 :as c0.2]
-            [noc.dots :as dots]))
+            [noc.chapter-0-3 :as c0.3]
+            [noc.chapter-0-3e :as c0.3e]))
 
-(def sketches {:dots dots/sketch
-               :walker {:init c0.1/init-state
-                        :setup c0.1/setup!
-                        :tick c0.1/tick
-                        :draw c0.1/draw!
-                        :size c0.1/size}
-               :rand-dist {:init c0.2/init-state
-                           :setup c0.2/setup!
-                           :tick c0.2/tick
-                           :draw c0.2/draw!
-                           :size c0.2/size}})
+(def sketches {:walker (sketch-> c0.1)
+               :rand-dist (sketch-> c0.2)
+               :walker-right (sketch-> c0.3)
+               :walker-dynamic (sketch-> c0.3e)})
 
 (defn load-sketch [s]
   (when-let [sk (get sketches s)]
@@ -79,7 +74,7 @@
   (try
     (q/state :state)
     (catch js/Error e
-      (.error js/log e)
+      (.error js/console e)
       nil)))
 
 (defn pause [sketch*]
@@ -105,6 +100,7 @@
 (defn tick-wrapper [tick state]
   (->
    state
+   (assoc :width (q/width) :height (q/height))
    (tick-time (time-now!) (q/current-frame-rate))
    (tick)))
 

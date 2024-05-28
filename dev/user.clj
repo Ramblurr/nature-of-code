@@ -16,7 +16,7 @@
 (def ^{:doc "static site defaults for local and github-pages modes."}
   defaults
   {:out-path   "public"
-   :cas-prefix "/nature-of-code/"})
+   :cas-prefix "/"})
 
 (defn start!
   "Starts a Clerk server process "
@@ -108,7 +108,7 @@
     :out-path "public"})
 
   (static-build! {:paths    ["notebooks/**"]
-                  ;; :index "notebooks/index.md"
+                  :index "notebooks/index.md"
                   :out-path "public"})
 
 ;;

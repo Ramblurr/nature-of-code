@@ -36,6 +36,6 @@
                 "p5": "^1.9.4"
         },
         "scripts": {
-                "serve": "http-server -c-1 -o -p 8080"
+                "serve": "http-server -c-1 -o -p 8080 public"
         }
 }

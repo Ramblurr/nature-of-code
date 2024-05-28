@@ -38,7 +38,8 @@
    :exec-args
    {:paths    ["notebooks/**"]
     :index "notebooks/index.md"
-    :out-path "public"}}
+    :out-path "public"
+    :cas-prefix "/nature-of-code/"}}
 
   :watch
   {:exec-fn   user/start-with-shadow!
