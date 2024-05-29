@@ -37,7 +37,7 @@
   {:exec-fn user/static-build!
    :exec-args
    {:paths    ["notebooks/**"]
-    :index "notebooks/index.md"
+    :index "notebooks/index.clj"
     :out-path "public"
     :cas-prefix "/nature-of-code/"}}
 

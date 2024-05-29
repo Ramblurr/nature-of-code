@@ -104,11 +104,11 @@
 
   (garden!
    {:paths    ["src/**"]
-    :index "notebooks/index.md"
+    :index "notebooks/index.clj"
     :out-path "public"})
 
   (static-build! {:paths    ["notebooks/**"]
-                  :index "notebooks/index.md"
+                  :index "notebooks/index.clj"
                   :out-path "public"})
 
   (update-in {:_ui {:foobar {:values :yay}}}
