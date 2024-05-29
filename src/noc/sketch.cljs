@@ -11,7 +11,8 @@
             [noc.chapter-0-4 :as c0.4]
             [noc.chapter-0-4e :as c0.4e]
             [noc.chapter-0-5e :as c0.5e]
-            [noc.chapter-0-5 :as c0.5]))
+            [noc.chapter-0-5 :as c0.5]
+            [noc.chapter-0-6e :as c0.6e]))
 
 (def sketches {:walker (sketch-> c0.1)
                :rand-dist (sketch-> c0.2)
@@ -20,7 +21,8 @@
                :random-gaussian (sketch-> c0.4)
                :c0.4e (sketch-> c0.4e)
                :c0.5e (sketch-> c0.5e)
-               :c0.5 (sketch-> c0.5)})
+               :c0.5 (sketch-> c0.5)
+               :c0.6e (sketch-> c0.6e)})
 
 (defn load-sketch [s]
   (when-let [sk (get sketches s)]

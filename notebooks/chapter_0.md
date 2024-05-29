@@ -158,3 +158,27 @@ The code does not enter an infinite loop because the lazy evaluation of the sequ
 ^{::clerk/no-cache true ::clerk/viewer clerk/code}
 (slurp "src/noc/chapter_0_5.cljs")
 ```
+
+
+## [Exercise 0.6: Accept-Reject Random Walk](https://natureofcode.com/random/#exercise-06)
+
+Another minor variation on the random walk, this time using a quadratic
+probability distribution.  The value squared (e.g., $r1^2$) can be much larger
+than the value itself, especially as `max` increases. To keep the probability in
+the range [0, 1], I normalize it by dividing by the maximum possible squared
+value $\text{max}^2$.
+
+$$
+r2 < \frac{r1^2}{\text{max}^2}
+$$
+
+So, higher values of $r1$ (closer to `max`) have a proportionally higher chance
+of being less than $r2$, thus more likely to be selected.
+
+
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_0_6e.cljs")
+(show-sketch :c0.6e)
+```
