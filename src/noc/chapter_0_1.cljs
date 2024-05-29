@@ -8,7 +8,7 @@
   {:walker {:x (quot width 2)
             :y (quot height 2)}})
 
-(defn setup! []
+(defn setup! [_]
   (q/background 255))
 
 (defn tick [{:keys [walker] :as state}]

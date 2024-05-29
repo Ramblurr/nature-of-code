@@ -18,7 +18,7 @@
                    :step 1
                    :value 1}}})
 
-(defn setup! []
+(defn setup! [_]
   (q/background 255))
 
 (defn rand-gaus [mean stdev] (+ mean (* stdev (q/random-gaussian))))

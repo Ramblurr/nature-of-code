@@ -9,7 +9,7 @@
                 :min 5 :max 120
                 :value 10}}})
 
-(defn setup! []
+(defn setup! [_]
   (q/color-mode :hsl 360)
   (q/background 360))
 

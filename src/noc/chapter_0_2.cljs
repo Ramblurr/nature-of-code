@@ -6,7 +6,7 @@
 (defn init-state [_]
   {:counts (into [] (repeat 20 0))})
 
-(defn setup! [])
+(defn setup! [_])
 
 (defn tick [{:keys [counts] :as state}]
   (let [idx (Math/floor (q/random (count counts)))]

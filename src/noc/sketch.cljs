@@ -103,7 +103,7 @@
   (let [{:keys [target-frame-rate] :as init-state} (setup-state init)]
     (adjust-frame)
     (q/frame-rate target-frame-rate)
-    (setup)
+    (setup init-state)
     init-state))
 
 (defn update-inputs [state]

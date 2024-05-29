@@ -7,7 +7,7 @@
 (defn init-state [_]
   {:counts (into [] (repeat 20 0))})
 
-(defn setup! [])
+(defn setup! [_])
 
 (defn accept-reject!
   "Pick a random number using a simple monte carlo method.

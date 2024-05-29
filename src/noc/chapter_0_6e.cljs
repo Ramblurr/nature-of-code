@@ -14,7 +14,7 @@
                        :step 1
                        :value 10}}})
 
-(defn setup! []
+(defn setup! [_]
   (q/background 255))
 
 (defn random-step-size!

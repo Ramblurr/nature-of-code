@@ -7,7 +7,7 @@
 (defn init-state [{:keys [width height]}]
   {})
 
-(defn setup! []
+(defn setup! [_]
   (q/background 255))
 
 (defn tick [s] s)
