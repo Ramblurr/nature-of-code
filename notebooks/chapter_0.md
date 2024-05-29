@@ -225,3 +225,30 @@ Of course in clojure we can't do that [^um-actually], so I took the approach of 
 Click that reset button to see it regenerated!
 
 [^um-actually]: Well, technically we can using dynamic vars or an atom, but that's pretty nasty and should only be used as an escape hatch when necessary.
+
+
+## [Exercise 0.8: A Perlin Noise Technicolor](https://natureofcode.com/random/#exercise-08)
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_0_8e.cljs")
+(show-sketch :c0.8e)
+```
+
+
+## [Exercise 0.9: Perlin Noise Animation](https://natureofcode.com/random/#exercise-08)
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_0_9e.cljs")
+(show-sketch :c0.9e)
+```
+
+Well this one is pretty cool. The sliders control (in order from left to right):
+
+* Perlin noise `octaves`
+* Perlin noise octave `fallof`
+* Amount `xoff` is incremented by
+* Amount `yoff` is incremented by
+
+Finally there is a checkbox to enable animation using the 3rd dimension of the perlin noise.
