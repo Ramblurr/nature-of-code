@@ -14,7 +14,8 @@
             [noc.chapter-0-5 :as c0.5]
             [noc.chapter-0-6e :as c0.6e]
             [noc.chapter-0-6 :as c0.6]
-            [noc.chapter-0-7e :as c0.7e]))
+            [noc.chapter-0-7e :as c0.7e]
+            [noc.chapter-0-7 :as c0.7]))
 
 (def sketches {:walker (sketch-> c0.1)
                :rand-dist (sketch-> c0.2)
@@ -26,7 +27,8 @@
                :c0.5 (sketch-> c0.5)
                :c0.6e (sketch-> c0.6e)
                :c0.6 (sketch-> c0.6)
-               :c0.7e (sketch-> c0.7e)})
+               :c0.7e (sketch-> c0.7e)
+               :c0.7 (sketch-> c0.7)})
 
 (defn load-sketch [s]
   (when-let [sk (get sketches s)]
@@ -78,7 +80,8 @@
 (defn setup-state [init-fn]
   (-> (default-state (time-now!))
       (merge (init-fn {:width (q/width) :height (q/height)}))
-      (ui/prepare-ui)))
+      (ui/prepare-ui)
+      (assoc :width (q/width) :height (q/height))))
 
 (defn reset [sketch*]
   (let [{:keys [applet opts]} @sketch*
@@ -87,7 +90,7 @@
       (let [state* (q/state-atom)]
         (ui/remove-all! @state*)
         (reset! state* (setup-state init))
-        (setup)))))
+        (setup @state*)))))
 
 (defn pause [sketch*]
   (let [{:keys [applet]} @sketch*]
