@@ -17,9 +17,17 @@
 (defn slider-value [s]
   (.value s))
 
+(defn checkbox
+  [{:keys [checked? label] :or {checked? false label ""}}]
+  (.createCheckbox (ap/current-applet) label checked?))
+
+(defn checkbox-value [c]
+  (.checked c))
+
 (defn prepare-element [state id {:keys [type] :as def}]
   (condp = type
     :slider (assoc-in state [:_ui id] (slider def))
+    :checkbox (assoc-in state [:_ui id] (checkbox def))
     state))
 
 (defn prepare-ui [{:keys [ui] :as state}]
@@ -34,6 +42,7 @@
     (if def
       (condp = (:type def)
         :slider (assoc-in state [:ui id :value] (slider-value handle))
+        :checkbox (assoc-in state [:ui id :checked?] (checkbox-value handle))
         state)
       (do
         (.remove handle)
