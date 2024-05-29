@@ -3,7 +3,7 @@
   (:require [quil.core :as q]
             [quil.middleware :as m]
             [quil.sketch :as ap :include-macros true]
-            [noc.ui :as ui]
+            [noc.quil.ui :as ui]
             [noc.chapter-0-1 :as c0.1]
             [noc.chapter-0-2 :as c0.2]
             [noc.chapter-0-3 :as c0.3]

@@ -3,6 +3,7 @@
   {:nextjournal.clerk/visibility {:code :hide}}
   (:require
    [noc.render]
+   [noc.clerk-ext :as clerk-ext]
    [nextjournal.clerk :as clerk]
    [clojure.java.io :as io]))
 ```
@@ -11,11 +12,15 @@
 
 This is my ClojureScript implementation of the samples and exercises from [Nature of Code (2nd Edition)][noc2] by Daniel Shiffman.
 
-The book will be released in July 2024 but is available for pre-order now, [go check it out!][noc2]
+The book will be released in July 2024. It is available online for free, but the pre-order for the hardback and ebook editions are open now. [Go check it out!][noc2]
 
-[noc2]: https://github.com/nature-of-code/noc-book-2
+[noc2]: https://natureofcode.com/
 
-This project is a work in progress and isn't yet finished. I add to it when I find the time, which may not be often.
+```
+(clerk-ext/admonition " This project is a work in progress and isn't yet finished. I add to it when I find the time, which may not be often." :style :warning)
+```
+
+You can find the source code for all of this at on GitHub at https://github.com/Ramblurr/nature-of-code
 
 
 ### Why?
@@ -28,7 +33,12 @@ Implementing it in Clojure lets me train my functional muscles and it's rather f
 
 Though I've tried to keep the code as close to the original as possible, Clojure is an immutable functional programming language, and my translation of the examples adhere to that property.
 
-To learn how I've structured the code to avoid willy-nilly mutation or what tech I'm using to render all of this, check out the [background](notebooks/background).
+
+```clojure
+(clerk/html
+  [:p "To learn how I've structured the code to avoid willy-nilly mutation or what tech I'm using to render all of this, check out the " 
+    [:a {:href (clerk/doc-url "notebooks/background")} "background"] "."])
+```
 
 ## Table of Contents
 

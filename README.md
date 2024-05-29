@@ -2,9 +2,11 @@
 
 [![License][license]][license-url]
 
-This is a ClojureScript implementation of the samples and exercises from [Nature of Code (2nd Edition)](noc2) by Daniel Shiffman 
+This is a ClojureScript implementation of the samples and exercises from [Nature
+of Code (2nd Edition)][noc2] by Daniel Shiffman, implemented using [Quil][quil]
+and rendered with [Clerk][clerk].
 
-> ➡️View live at: https://ramblurr.github.io/nature-of-code/
+> ##  ➡️ View live at: https://ramblurr.github.io/nature-of-code/
 
 ## Dependencies
 
@@ -99,4 +101,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 [license]: https://img.shields.io/github/license/ramblurr/nature-of-code
 [license-url]: LICENSE
-[noc2]: https://github.com/nature-of-code/noc-book-2
+[noc2]: https://natureofcode.com/
+[quil]: http://quil.info/
+[clerk]: https://clerk.vision/

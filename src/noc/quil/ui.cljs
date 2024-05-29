@@ -1,4 +1,4 @@
-(ns noc.ui
+(ns noc.quil.ui
   (:require
    [quil.sketch :as ap :include-macros true]))
 
