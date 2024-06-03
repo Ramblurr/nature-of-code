@@ -252,3 +252,17 @@ Well this one is pretty cool. The sliders control (in order from left to right):
 * Amount `yoff` is incremented by
 
 Finally there is a checkbox to enable animation using the 3rd dimension of the perlin noise.
+
+
+## [Exercise 0.9: Perlin Noise Landscape](https://natureofcode.com/random/#exercise-09)
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_0_10e.cljs")
+(show-sketch :c0.10e)
+```
+
+The performance for this one is pretty bad here in the notebook. I'm not 100%
+sure why. I switched from a naive nested 2-d vector to using transients, but
+that didn't have much of an effect. Some day I'll come back and investigate
+more.

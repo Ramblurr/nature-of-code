@@ -1,5 +1,5 @@
 (ns noc.sketch
-  (:require-macros [noc.sketch :refer [sketch->]])
+  (:require-macros [noc.sketch :refer [sketch-> sketch-3d->]])
   (:require [quil.core :as q]
             [quil.middleware :as m]
             [quil.sketch :as ap :include-macros true]
@@ -17,22 +17,25 @@
             [noc.chapter-0-7e :as c0.7e]
             [noc.chapter-0-7 :as c0.7]
             [noc.chapter-0-8e :as c0.8e]
-            [noc.chapter-0-9e :as c0.9e]))
+            [noc.chapter-0-9e :as c0.9e]
+            [noc.chapter-0-10e :as c0.10e]))
 
-(def sketches {:walker (sketch-> c0.1)
-               :rand-dist (sketch-> c0.2)
-               :walker-right (sketch-> c0.3)
-               :walker-dynamic (sketch-> c0.3e)
-               :random-gaussian (sketch-> c0.4)
-               :c0.4e (sketch-> c0.4e)
-               :c0.5e (sketch-> c0.5e)
-               :c0.5 (sketch-> c0.5)
-               :c0.6e (sketch-> c0.6e)
-               :c0.6 (sketch-> c0.6)
-               :c0.7e (sketch-> c0.7e)
-               :c0.7 (sketch-> c0.7)
-               :c0.8e (sketch-> c0.8e)
-               :c0.9e (sketch-> c0.9e)})
+(def sketches
+  {:walker (sketch-> c0.1)
+   :rand-dist (sketch-> c0.2)
+   :walker-right (sketch-> c0.3)
+   :walker-dynamic (sketch-> c0.3e)
+   :random-gaussian (sketch-> c0.4)
+   :c0.4e (sketch-> c0.4e)
+   :c0.5e (sketch-> c0.5e)
+   :c0.5 (sketch-> c0.5)
+   :c0.6e (sketch-> c0.6e)
+   :c0.6 (sketch-> c0.6)
+   :c0.7e (sketch-> c0.7e)
+   :c0.7 (sketch-> c0.7)
+   :c0.8e (sketch-> c0.8e)
+   :c0.9e (sketch-> c0.9e)
+   :c0.10e (sketch-3d-> c0.10e)})
 
 (defn load-sketch [s]
   (when-let [sk (get sketches s)]
@@ -141,12 +144,14 @@
 
 (defn show-sketch [adjust-frame {:keys [init setup tick draw size] :as opts} el]
   {:applet (apply q/sketch (apply concat
-                                  (-> opts
-                                      (assoc :middleware [m/fun-mode])
-                                      (assoc :host el)
-                                      (assoc :update (partial tick-wrapper tick))
-                                      (assoc :setup (partial setup-wrapper (partial adjust-frame el) init setup))
-                                      (assoc :draw (partial draw-wrapper draw)))))
+                                  (doto
+                                   (-> opts
+                                       (assoc :middleware [m/fun-mode])
+                                       (assoc :host el)
+                                       (assoc :update (partial tick-wrapper tick))
+                                       (assoc :setup (partial setup-wrapper (partial adjust-frame el) init setup))
+                                       (assoc :draw (partial draw-wrapper draw)))
+                                    prn)))
    :sketch-name (:sketch-name opts)
    :opts opts
    :el el})
