@@ -65,4 +65,8 @@
    [{:title "Chapter 0"
      :preview (io/resource "assets/img/chapter0.png")
      :path "notebooks/chapter_0"
-     :description "Randomness"}])))
+     :description "Randomness"}
+    {:title "Chapter 1"
+     :preview (io/resource "assets/img/chapter0.png")
+     :path "notebooks/chapter_1"
+     :description "Vectors"}])))

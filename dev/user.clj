@@ -114,5 +114,6 @@
   (update-in {:_ui {:foobar {:values :yay}}}
              [:_ui]
              #(dissoc % :foobar))
+  (range 10)
 ;;
   )

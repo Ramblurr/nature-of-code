@@ -4,6 +4,9 @@
          ;; Make beautiful animations with p5.js
          quil/quil {:mvn/version "4.3.1563"}
 
+         ;; Geometry kit
+         thi.ng/geom {:mvn/version "1.0.1"}
+
          ;; silence log warnings
          org.slf4j/slf4j-nop {:mvn/version "1.7.36"}
 
