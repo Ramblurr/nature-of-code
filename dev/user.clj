@@ -115,5 +115,20 @@
              [:_ui]
              #(dissoc % :foobar))
   (range 10)
-;;
+
+  ()
+
+  (require '[thi.ng.math.core :as tm])
+  (require '[thi.ng.geom.vector :as v])
+  (require '[thi.ng.geom.core :as g])
+  (let [v1 (v/vec2 2 2)
+        v2 (v/vec2 1 1)
+        v3 (v/vec2 3 4)]
+    (= v3 (tm/+ v1 v2))
+    (=  (tm/* v1 4) (v/vec2 8.0 8.0))
+    (= 5.0 (tm/mag (v/vec2 4 3)))
+    (tm/+ (v/vec2 1 1) (v/vec2 1 1))
+    (tm/normalize (v/vec2 2 3))
+    (g/heading-xy (v/vec2 2 3)))
+  ;;
   )
