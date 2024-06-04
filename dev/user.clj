@@ -129,6 +129,14 @@
     (= 5.0 (tm/mag (v/vec2 4 3)))
     (tm/+ (v/vec2 1 1) (v/vec2 1 1))
     (tm/normalize (v/vec2 2 3))
-    (g/heading-xy (v/vec2 2 3)))
+    (g/heading-xy (v/vec2 2 3))
+    (g/rotate (v/vec2 1 1) Math/PI)
+    (tm/mix (v/vec2 1 1) (v/vec2 2 2) 0.5)
+    (g/dist (v/vec2 1 1) (v/vec2 2 2))
+    (g/angle-between (v/vec2 1 1) (v/vec2 2 3))
+
+    ;;
+    )
+
   ;;
   )

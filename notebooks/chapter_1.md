@@ -137,3 +137,41 @@ But this it may be surprising. `(tm/+ (v/vec2 1 1) (v/vec2 1 1))` produces a vec
 Ok, for this one I got tired of destructuring the vectors or using `first` and `second` to yoink out the components to pass to quil's `line` function. A little helper goes a long way.
 
 By the way, Daniel's exposition on the vector math in this chapter is really great. Don't just look at the code, refer to the text and the illustrations to really get an understanding of the vector math.
+
+
+## [Example 1.5: Vector Magnitude](https://natureofcode.com/vectors/#example-15-vector-magnitude)
+
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_1_5.cljs")
+(show-sketch :c1.5)
+```
+
+Here I pulled out the line helper into a util namespace, because I imagine we will use it a lot in the future.
+
+## [Example 1.6: Normalizing a Vector](https://natureofcode.com/vectors/#example-16-normalizing-a-vector)
+
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_1_6.cljs")
+(show-sketch :c1.6)
+```
+
+## [Example 1.7: Motion 101 (Velocity)](https://natureofcode.com/vectors/#example-17-motion-101-velocity)
+
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_1_7.cljs")
+(show-sketch :c1.7)
+```
+
+Wow, so I discovered several things while writing this example. 
+
+1. The `(v/x some-vector)` and `(v/y some-vector)` functions  (where `v` is `[thi.ng.geom.vector :as v]`) will return the corresponding x and y components. This could be handy in the future
+2. But since the vector type implements all the interfaces to be treated as a map, you can also `assoc` with it while referring to the keys `:x` and `:y`
+
+I used the 2nd discovery to implement a bounds checking function that is rather generic, while still being readable. I am quite pleased with that.
+
