@@ -40,3 +40,19 @@ What's important is that we introduce the [`[thi.ng.geom.vector]`](https://cljdo
 Why did I choose to pull in `thi.ng/geom` rather than use p5.js's `createVector` and other associated functions?
 
 Well, Quil doesn't expose these functions because the P5.js and Processing APIs for vectors is not at all compatible. Furthermore I want the code in this notebook to be more or less Clojure and Clojurescript compatible. The `thi.ng/geom` library provides a bunch of tools that we will use in the future.
+
+
+## Exercises 1.1 and 1.2
+
+I am skipping these exercises as they don't add much to what we did in Example 1
+
+## [Exercise 1.3: Bouncing Sphere](https://natureofcode.com/vectors/#exercise-13)
+
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_1_3e.cljs")
+(show-sketch :c1.3e)
+```
+
+This was more an exercise in 3d than vectors, haha! I fake the boundary condition for the sphere, but it looks more or less right.

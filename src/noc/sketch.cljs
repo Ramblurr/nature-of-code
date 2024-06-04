@@ -20,7 +20,8 @@
             [noc.chapter-0-9e :as c0.9e]
             [noc.chapter-0-10e :as c0.10e]
             [noc.chapter-1-1 :as c1.1]
-            [noc.chapter-1-2 :as c1.2]))
+            [noc.chapter-1-2 :as c1.2]
+            [noc.chapter-1-3e :as c1.3e]))
 
 (def sketches
   {:walker (sketch-> c0.1)
@@ -39,7 +40,8 @@
    :c0.9e (sketch-> c0.9e)
    :c0.10e (sketch-3d-> c0.10e)
    :c1.1 (sketch-> c1.1)
-   :c1.2 (sketch-> c1.2)})
+   :c1.2 (sketch-> c1.2)
+   :c1.3e (sketch-3d-> c1.3e)})
 
 (defn load-sketch [s]
   (when-let [sk (get sketches s)]
@@ -148,14 +150,12 @@
 
 (defn show-sketch [adjust-frame {:keys [init setup tick draw size] :as opts} el]
   {:applet (apply q/sketch (apply concat
-                                  (doto
-                                   (-> opts
-                                       (assoc :middleware [m/fun-mode])
-                                       (assoc :host el)
-                                       (assoc :update (partial tick-wrapper tick))
-                                       (assoc :setup (partial setup-wrapper (partial adjust-frame el) init setup))
-                                       (assoc :draw (partial draw-wrapper draw)))
-                                    prn)))
+                                  (-> opts
+                                      (assoc :middleware [m/fun-mode])
+                                      (assoc :host el)
+                                      (assoc :update (partial tick-wrapper tick))
+                                      (assoc :setup (partial setup-wrapper (partial adjust-frame el) init setup))
+                                      (assoc :draw (partial draw-wrapper draw)))))
    :sketch-name (:sketch-name opts)
    :opts opts
    :el el})
