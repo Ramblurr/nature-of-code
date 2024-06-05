@@ -8,7 +8,8 @@
    [nextjournal.clerk.viewer :as cv]
    [shadow.cljs.devtools.server :as shadow.server]
    [shadow.cljs.devtools.server.npm-deps :as npm-deps]
-   [shadow.cljs.devtools.api :as shadow.api]))
+   [shadow.cljs.devtools.api :as shadow.api]
+   [thi.ng.math.core :as tm]))
 
 (def build-target
   {:git/url "https://github.com/ramblurr/nature-of-code"})
@@ -137,6 +138,13 @@
 
     ;;
     )
+  (tm/limit (v/vec2 1 1) 0.5)
+  (mod (dec 0) 10)
+
+  (let [v (v/vec2 1 5)
+        u (tm/* v 2)
+        w (tm/- v u)]
+    (tm/div w 3))
 
   ;;
   )

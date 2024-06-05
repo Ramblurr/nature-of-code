@@ -4,6 +4,8 @@
 (ns chapter-1
   {:nextjournal.clerk/visibility {:code :hide} :nextjournal.clerk/toc true}
   (:require
+   [thi.ng.math.core :as tm]
+   [thi.ng.geom.vector :as v]
    [clojure.java.io :as io]
    [nextjournal.clerk :as clerk]
    [noc.quil-clerk :refer [show-sketch]]))
@@ -91,25 +93,25 @@ In the following table the namespaces referenced are:
 * [`[thi.ng.math.core :as tm]`](https://github.com/thi-ng/math/blob/0.3.2/src/core.org)
 * [`[thi.ng.geom.core :as g]`](https://cljdoc.org/d/thi.ng/geom/1.0.1/api/thi.ng.geom.core)
 
-| p5.js Method     | `thi.ng` Function        | Task                                                                             |
-|------------------|--------------------------|----------------------------------------------------------------------------------|
-| `add()`          | `(tm/+ a b)`             | Adds vector `a` to  vector `b`                                                   |
-| `sub()`          | `(tm/- a b`              | Subtracts  vector `a` from vector `b`                                            |
-| `mult()`         | `(tm/* a b)`             | Scales this vector with multiplication                                           |
-| `div()`          | `(tm/div a b)`           | Scales this vector with division                                                 |
-| `mag()`          | `(tm/mag a)`             | Returns the magnitude of the vector `a`                                          |
-| `setMag()`       | `-`                      | Sets the magnitude of this vector- Not available AFAICT                          |
-| `normalize()`    | `(tm/normalize a)`       | Normalizes this vector to a unit length of 1                                     |
-| `limit()`        | `(tm/limit a)`           | Limits the magnitude of this vector                                              |
-| `heading()`      | `(g/heading-xy a)`       | Returns the 2D heading of this vector expressed as an angle                      |
-| `rotate()`       | `(g/rotate a angle)`     | Rotates this 2D vector by `angle` (in radians)                                   |
-| `lerp()`         | `(tm/mix a b amt)`       | Linear interpolates vector `a` towards vector `b` by `amt`                       |
-| `dist()`         | `(g/dist a b)`           | Returns the Euclidean distance between vector `a` and `b` (considered as points) |
-| `angleBetween()` | `(g/angle-between a b )` | Finds the angle between vector `a` and vector `b`                                |
-| `dot()`          | `(tm/dot a b)`           | Returns $$\vec{a}  \cdot \vec{b} $$ (the dot product)                            |
-| `cross()`        | `(tm/cross a b)`         | Returns $$\vec{a}  \times \vec{b} $$ (the cross product)                         |
-| `random2D()`     | `-`                      | Returns a random 2D vector - Not available AFAICT                                |
-| `random3D()`     | `-`                      | Returns a random 3D vector - Not available AFAICT                                |
+| p5.js Method     | `thi.ng` Function           | Task                                                                             |
+|------------------|-----------------------------|----------------------------------------------------------------------------------|
+| `add()`          | `(tm/+ a b)`                | Adds vector `a` to  vector `b`                                                   |
+| `sub()`          | `(tm/- a b`                 | Subtracts  vector `a` from vector `b`                                            |
+| `mult()`         | `(tm/* a b)`                | Scales this vector with multiplication                                           |
+| `div()`          | `(tm/div a b)`              | Scales this vector with division                                                 |
+| `mag()`          | `(tm/mag a)`                | Returns the magnitude of the vector `a`                                          |
+| `normalize()`    | `(tm/normalize a)`          | Normalizes this vector to a unit length of 1                                     |
+| `setMag()`       | `(tm/* (tm/normalize a) x)` | Sets the magnitude of this vector `a` to `x`                                     |
+| `limit()`        | `(tm/limit a)`              | Limits the magnitude of this vector                                              |
+| `heading()`      | `(g/heading-xy a)`          | Returns the 2D heading of this vector expressed as an angle                      |
+| `rotate()`       | `(g/rotate a angle)`        | Rotates this 2D vector by `angle` (in radians)                                   |
+| `lerp()`         | `(tm/mix a b amt)`          | Linear interpolates vector `a` towards vector `b` by `amt`                       |
+| `dist()`         | `(g/dist a b)`              | Returns the Euclidean distance between vector `a` and `b` (considered as points) |
+| `angleBetween()` | `(g/angle-between a b )`    | Finds the angle between vector `a` and vector `b`                                |
+| `dot()`          | `(tm/dot a b)`              | Returns $$\vec{a}  \cdot \vec{b} $$ (the dot product)                            |
+| `cross()`        | `(tm/cross a b)`            | Returns $$\vec{a}  \times \vec{b} $$ (the cross product)                         |
+| `random2D()`     | `-`                         | Returns a random 2D vector - Not available AFAICT                                |
+| `random3D()`     | `-`                         | Returns a random 3D vector - Not available AFAICT                                |
 
 Some extra notes:
 
@@ -207,3 +209,75 @@ The sprite is from [senderin](https://senderin.itch.io/car). The entire sheet is
 ```
 (clerk/image (io/resource "assets/img/car-side-right.png"))
 ```
+
+
+## [Example 1.9: Motion 101 (Velocity and Random Acceleration)](https://natureofcode.com/vectors/#example-19-motion-101-velocity-and-random-acceleration)
+
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_1_9.cljs")
+(show-sketch :c1.9)
+```
+
+## [Exercise: 1.6: A Perlin Noise Accelerated Walker](https://natureofcode.com/vectors/#exercise-16)
+
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_1_6e.cljs")
+(show-sketch :c1.6e)
+```
+
+This one is very nice, the contrast between this exercise and Example 1.9 is
+stark. This one feels much more natural.
+
+## [Exercise: 1.7: Pseudocode Translation](https://natureofcode.com/vectors/#exercise-17)
+
+Of course here in Clojure we don't have any of the confusion that this section of the chapter is addressing (of course, being Clojure we have our own other sorts of confusion). 
+
+Our function calls do not mutate any of the arguments, rather, they return a new `vec2` as the result.
+
+```
+^{:nextjournal.clerk/visibility {:code :show} :nextjournal.clerk/auto-expand-results? true}
+(let [v (v/vec2 1 5)
+      u (tm/* v 2)
+      w (tm/- v u)]
+      {:result (tm/div w 3)
+      :v v
+      :u u 
+      :w w})
+```
+
+We can see that none of the arguments were changed.
+
+## [Example 1.10: Accelerating Toward the Mouse](https://natureofcode.com/vectors/#example-110-accelerating-toward-the-mouse)
+
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_1_10.cljs")
+(show-sketch :c1.10)
+```
+
+Hover your mouse over the sketch!
+
+
+## [Exercise 1.8e: Variable Magnitude of Acceleration](https://natureofcode.com/vectors/#exercise-18)
+
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_1_8e.cljs")
+(show-sketch :c1.8e)
+```
+
+Once again, hover your mouse over the sketch.
+
+I used `thi.ng.geom.core/dist` to calculate the euclidean distance and then
+calculate the acceleration as `2 / distance`. Why 2? Well, first I tried `1 /
+distance` but the effect was rather slow, increasing the numerator speeds it up.
+
+One problem with the sketch was that it would follow the mouse off-screen. So
+I've added a check that stops the mover when the mouse is not contained in the
+canvas.

@@ -28,7 +28,11 @@
             [noc.chapter-1-6 :as c1.6]
             [noc.chapter-1-7 :as c1.7]
             [noc.chapter-1-8 :as c1.8]
-            [noc.chapter-1-5e :as c1.5e]))
+            [noc.chapter-1-5e :as c1.5e]
+            [noc.chapter-1-9 :as c1.9]
+            [noc.chapter-1-6e :as c1.6e]
+            [noc.chapter-1-10 :as c1.10]
+            [noc.chapter-1-8e :as c1.8e]))
 
 (def sketches
   {:walker (sketch-> c0.1)
@@ -55,7 +59,11 @@
    :c1.6 (sketch-> c1.6)
    :c1.7 (sketch-> c1.7)
    :c1.8 (sketch-> c1.8)
-   :c1.5e (sketch-> c1.5e)})
+   :c1.5e (sketch-> c1.5e)
+   :c1.9 (sketch-> c1.9)
+   :c1.6e (sketch-> c1.6e)
+   :c1.10 (sketch-> c1.10)
+   :c1.8e (sketch-> c1.8e)})
 
 (defn load-sketch [s]
   (when-let [sk (get sketches s)]
