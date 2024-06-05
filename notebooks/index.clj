@@ -69,6 +69,6 @@
      :path "notebooks/chapter_0"
      :description "Randomness"}
     {:title "Chapter 1"
-     :preview (io/resource "assets/img/chapter0.png")
+     :preview (io/resource "assets/img/chapter1.png")
      :path "notebooks/chapter_1"
      :description "Vectors"}])))
