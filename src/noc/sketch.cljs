@@ -26,7 +26,9 @@
             [noc.chapter-1-4 :as c1.4]
             [noc.chapter-1-5 :as c1.5]
             [noc.chapter-1-6 :as c1.6]
-            [noc.chapter-1-7 :as c1.7]))
+            [noc.chapter-1-7 :as c1.7]
+            [noc.chapter-1-8 :as c1.8]
+            [noc.chapter-1-5e :as c1.5e]))
 
 (def sketches
   {:walker (sketch-> c0.1)
@@ -51,7 +53,9 @@
    :c1.4 (sketch-> c1.4)
    :c1.5 (sketch-> c1.5)
    :c1.6 (sketch-> c1.6)
-   :c1.7 (sketch-> c1.7)})
+   :c1.7 (sketch-> c1.7)
+   :c1.8 (sketch-> c1.8)
+   :c1.5e (sketch-> c1.5e)})
 
 (defn load-sketch [s]
   (when-let [sk (get sketches s)]
@@ -142,6 +146,7 @@
              :mouse-y (q/mouse-y)
              :mouse-button (q/mouse-button)
              :mouse-pressed? (q/mouse-pressed?)
+             :key-pressed? (q/key-pressed?)
              :key (q/key-as-keyword)
              :key-code (q/key-code)
              :raw-key (q/raw-key))))

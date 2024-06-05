@@ -3,8 +3,10 @@
 ```clojure
 (ns chapter-1
   {:nextjournal.clerk/visibility {:code :hide} :nextjournal.clerk/toc true}
-  (:require [nextjournal.clerk :as clerk]
-            [noc.quil-clerk :refer [show-sketch]]))
+  (:require
+   [clojure.java.io :as io]
+   [nextjournal.clerk :as clerk]
+   [noc.quil-clerk :refer [show-sketch]]))
 ```
 
 Chapter 1! Here we go!
@@ -175,3 +177,33 @@ Wow, so I discovered several things while writing this example.
 
 I used the 2nd discovery to implement a bounds checking function that is rather generic, while still being readable. I am quite pleased with that.
 
+
+## [Example 1.8: Motion 101 (Velocity and Constant Acceleration)](https://natureofcode.com/vectors/#example-18-motion-101-velocity-and-constant-acceleration)
+
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_1_8.cljs")
+(show-sketch :c1.8)
+```
+
+## [Exercise 1.5: Acceleration Control](https://natureofcode.com/vectors/#exercise-15)
+
+
+```clojure
+^{::clerk/no-cache true ::clerk/viewer clerk/code}
+(slurp "src/noc/chapter_1_5e.cljs")
+```
+
+For this exercise I got a little fancy by rendering a simple animated sprite for the car, and applying a bit of friction modeled as a scalar that is multiplied against the velocity vector.
+
+Use `A` and `D` to move the car to the right/left.
+
+```
+(show-sketch :c1.5e)
+```
+The sprite is from [senderin](https://senderin.itch.io/car). The entire sheet is 10 frames:
+
+```
+(clerk/image (io/resource "assets/img/car-side-right.png"))
+```

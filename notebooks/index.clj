@@ -31,10 +31,12 @@
 
 ;; I've been a fan of Daniel Shiffman's work (the 1st edition of Nature of Code,
 ;; as well as their excellent [Coding Train](https://thecodingtrain.com/)) for a
-;; long time. I've always wanted to work through the book. When I learned that they were releasing a new edition, I figured now was the time.
+;; long time. I've always wanted to work through the book. When I learned that
+;; they were releasing a new edition, I figured now was the time.
 
 ;; Implementing the examples and exercises in Clojure is a great way to move
-;; through the material to ensure I understand it.
+;; through the material in a piece-wise manner and explore the various Clojure ecosystem around creative coding
+;; and math/geometry (in particular [thi.ng/geom](https://github.com/thi-ng/geom))
 
 ;; ### How?
 
